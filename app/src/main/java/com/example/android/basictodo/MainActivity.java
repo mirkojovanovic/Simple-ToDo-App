@@ -5,18 +5,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.rvList)
     RecyclerView mListRecyclerView;
 
-    ArrayList<ListItem> items;
+    @BindView(R.id.new_item_edit_text)
+    TextView mNewItemEditText;
+
+    private ArrayList<ListItem> items;
+
+    private ItemsAdapter itemsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +35,17 @@ public class MainActivity extends AppCompatActivity {
 
         items = new ArrayList<>();
 
-        ItemsAdapter adapter = new ItemsAdapter(items);
+        itemsAdapter = new ItemsAdapter(items);
 
-        mListRecyclerView.setAdapter(adapter);
+        mListRecyclerView.setAdapter(itemsAdapter);
 
         mListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @OnClick(R.id.add_button)
+    public void addListItem() {
+        items.add(new ListItem(mNewItemEditText.getText().toString()));
+        itemsAdapter.notifyItemInserted(0);
+        mNewItemEditText.setText("");
     }
 }
