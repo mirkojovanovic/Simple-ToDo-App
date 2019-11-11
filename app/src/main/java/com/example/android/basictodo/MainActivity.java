@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.rvList)
-    private RecyclerView mListRecyclerView;
+    RecyclerView mListRecyclerView;
 
     ArrayList<ListItem> items;
 
