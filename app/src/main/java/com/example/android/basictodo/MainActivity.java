@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        items = new ArrayList<>();
+
         ItemsAdapter adapter = new ItemsAdapter(items);
 
         mListRecyclerView.setAdapter(adapter);
