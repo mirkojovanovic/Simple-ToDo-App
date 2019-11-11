@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.add_button)
     public void addListItem() {
         items.add(new ListItem(mNewItemEditText.getText().toString()));
-        itemsAdapter.notifyItemInserted(0);
+        itemsAdapter.notifyItemInserted(items.size());
         mNewItemEditText.setText("");
     }
 }
