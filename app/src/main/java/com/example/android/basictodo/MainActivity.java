@@ -1,12 +1,10 @@
 package com.example.android.basictodo;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -22,8 +20,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.new_item_edit_text)
     TextView mNewItemEditText;
 
-    private ArrayList<ListItem> items;
-
+    private ArrayList<ListItem> items = new ArrayList<>();
     private ItemsAdapter itemsAdapter;
 
     @Override
@@ -33,19 +30,18 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        items = new ArrayList<>();
-
         itemsAdapter = new ItemsAdapter(items);
 
         mListRecyclerView.setAdapter(itemsAdapter);
 
-        mListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @OnClick(R.id.add_button)
     public void addListItem() {
-        items.add(new ListItem(mNewItemEditText.getText().toString()));
-        itemsAdapter.notifyItemInserted(items.size());
-        mNewItemEditText.setText("");
+        if (mNewItemEditText.getText().toString().length() > 0) {
+            items.add(new ListItem(mNewItemEditText.getText().toString()));
+            itemsAdapter.notifyItemInserted(items.size());
+            mNewItemEditText.setText("");
+        }
     }
 }
